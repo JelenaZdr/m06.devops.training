@@ -31,6 +31,7 @@ blocks:
             - artifact pull .terraform.lock.hcl
             - terraform init
             - terraform validate
+            - aws dynamodb delete-table --table-name blkn
             - terraform apply -auto-approve
             - artifact push terraform.tfstate
     dependencies:
