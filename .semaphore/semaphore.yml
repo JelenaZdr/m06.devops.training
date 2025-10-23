@@ -11,3 +11,9 @@ blocks:
         - name: 'Job #1'
           commands:
             - checkout
+            - cd 1-terraform-apply
+            - terraform init
+            - 'artifact push .terraform '
+            - artifact push .terraform.lock.hcl
+      secrets:
+        - name: localstack
