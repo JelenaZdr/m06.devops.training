@@ -58,4 +58,4 @@ blocks:
             - 'artifact pull .terraform '
             - artifact pull .terraform.lock.hcl
             - artifact pull terraform.tfstate
-            - terraform destoy -auto-approve
+            - terraform destroy -auto-approve
