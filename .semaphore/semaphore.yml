@@ -28,6 +28,7 @@ blocks:
             - cd 1-terraform-apply
             - 'artifact pull .terraform '
             - artifact pull .terraform.lock.hcl
+            - terraform init
             - terraform validate
             - terraform apply -auto-approve
             - artifact push terraform.tfstate
