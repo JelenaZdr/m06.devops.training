@@ -21,7 +21,7 @@ provider "aws" {
   }
 }
 
-resource "aws_s3_bucket" "Balkan" {
+resource "aws_s3_bucket" "balkan" {
   bucket = var.bucket_name
 }
 
