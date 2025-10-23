@@ -59,3 +59,5 @@ blocks:
             - artifact pull .terraform.lock.hcl
             - artifact pull terraform.tfstate
             - terraform destroy -auto-approve
+      secrets:
+        - name: localstack
