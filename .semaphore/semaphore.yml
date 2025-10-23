@@ -5,7 +5,7 @@ agent:
     type: f1-standard-2
     os_image: ubuntu2204
 blocks:
-  - name: 'Block #1'
+  - name: 'Block #11'
     task:
       jobs:
         - name: 'Job #1'
@@ -34,7 +34,7 @@ blocks:
             - terraform apply -auto-approve
             - artifact push terraform.tfstate
     dependencies:
-      - 'Block #1'
+      - 'Block #11'
   - name: 'Block #4'
     task:
       jobs:
