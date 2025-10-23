@@ -48,3 +48,12 @@ blocks:
             - 'aws s3 cp README.md s3://balkan/'
             - 'aws s3 ls s3://balkan'
             - 'aws s3 rm s3://balkan/README.md'
+  - name: 'Block #4'
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - 'checkout '
+            - cd 1-terraform-apply
+            - artifact pull workflow
+            - terraform destoy -auto-approve
