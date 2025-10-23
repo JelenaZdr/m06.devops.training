@@ -64,8 +64,8 @@ blocks:
             - terraform init
             - 'alias aws="aws --endpoint-url=http://devops.tomfern.com:31566"'
             - aws dynamodb list-tables
-            - aws dynamodb describe-table --table-name balkan
-            - 'aws dynamodb put-item \ --table-name balkan \ --item ''{ "user_id": {"S": "u1"}, "name": {"S": "Alice"}, "email": {"S": "alice@example.com"} }'''
-            - aws dynamodb scan --table-name balkan
+            - aws dynamodb describe-table --table-name blkn
+            - 'aws dynamodb put-item \ --table-name blkn \ --item ''{ "user_id": {"S": "u1"}, "name": {"S": "Alice"}, "email": {"S": "alice@example.com"} }'''
+            - aws dynamodb scan --table-name blkn
       secrets:
         - name: localstack
