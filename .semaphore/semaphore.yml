@@ -17,6 +17,7 @@ blocks:
             - artifact push .terraform.lock.hcl
       secrets:
         - name: localstack
+    dependencies: []
   - name: 'Block #2'
     task:
       secrets:
@@ -25,20 +26,22 @@ blocks:
         - name: 'Job #1'
           commands:
             - 'checkout '
-            - cd 2-terraform-ec2
+            - cd 3-terraform-dynamodb
             - 'artifact pull .terraform '
             - artifact pull .terraform.lock.hcl
             - terraform init
             - terraform validate
             - terraform apply -auto-approve
             - artifact push terraform.tfstate
+    dependencies:
+      - 'Block #1'
   - name: 'Block #4'
     task:
       jobs:
         - name: 'Job #1'
           commands:
             - 'checkout '
-            - cd 2-terraform-ec2
+            - cd 3-terraform-dynamodb
             - terraform init
             - 'artifact pull .terraform '
             - artifact pull .terraform.lock.hcl
@@ -46,3 +49,21 @@ blocks:
             - terraform destroy -auto-approve
       secrets:
         - name: localstack
+    dependencies:
+      - 'Block #3'
+  - name: 'Block #3'
+    dependencies:
+      - 'Block #2'
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - 'checkout '
+            - cd 3-terraform-dynamodb
+            - artifact pull terraform.tfstate
+            - terraform init
+            - 'alias aws="aws --endpoint-url=http://devops.tomfern.com:31566"'
+            - aws dynamodb list-tables
+            - aws dynamodb describe-table --table-name balkan
+            - 'aws dynamodb put-item \ --table-name balkan \ --item ''{ "user_id": {"S": "u1"}, "name": {"S": "Alice"}, "email": {"S": "alice@example.com"} }'''
+            - aws dynamodb scan --table-name balkan
