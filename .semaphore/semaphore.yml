@@ -69,7 +69,7 @@ blocks:
             - terraform init
             - aws dynamodb list-tables --region us-east-1
             - aws dynamodb describe-table --table-name blkn_v2 --region us-east-1
-            - 'aws dynamodb put-item --table-name blkn_v2 --item ''{ "user_id": {"S": "u1"}, "name": {"S": "Alice"}, "email": {"S": "alice@example.com"} }'''
+            - 'aws dynamodb put-item --table-name blkn_v2 --item ''{ "user_id": {"S": "u1"}, "name": {"S": "Alice"}, "email": {"S": "alice@example.com"} }'' --region us-east-1'
             - aws dynamodb scan --table-name blkn_v2 --region us-east-1
       secrets:
         - name: localstack
