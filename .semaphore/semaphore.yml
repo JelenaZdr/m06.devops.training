@@ -55,6 +55,7 @@ blocks:
           commands:
             - 'checkout '
             - cd 1-terraform-apply
+            - terraform init
             - 'artifact pull .terraform '
             - artifact pull .terraform.lock.hcl
             - artifact pull terraform.tfstate
