@@ -17,3 +17,17 @@ blocks:
             - artifact push .terraform.lock.hcl
       secrets:
         - name: localstack
+  - name: 'Block #2'
+    task:
+      secrets:
+        - name: localstack
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - 'checkout '
+            - cd 1-terraform-apply
+            - 'artifact pull .terraform '
+            - artifact pull .terraform.lock.hcl
+            - terraform validate
+            - terraform apply -auto-approve
+            - artifact push terraform.tfstate
