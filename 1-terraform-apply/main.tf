@@ -21,12 +21,12 @@ provider "aws" {
   }
 }
 
-resource "aws_s3_bucket" "example" {
+resource "aws_s3_bucket" "Balkan" {
   bucket = var.bucket_name
 }
 
 resource "aws_s3_bucket_acl" "example_acl" {
-  bucket = aws_s3_bucket.example.id
+  bucket = aws_s3_bucket.Balkan.id
   acl    = "private"
 }
 
