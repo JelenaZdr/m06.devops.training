@@ -67,3 +67,5 @@ blocks:
             - aws dynamodb describe-table --table-name balkan
             - 'aws dynamodb put-item \ --table-name balkan \ --item ''{ "user_id": {"S": "u1"}, "name": {"S": "Alice"}, "email": {"S": "alice@example.com"} }'''
             - aws dynamodb scan --table-name balkan
+      secrets:
+        - name: localstack
