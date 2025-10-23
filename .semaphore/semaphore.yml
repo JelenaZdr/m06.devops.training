@@ -44,6 +44,7 @@ blocks:
             - artifact pull terraform.tfstate
             - terraform init
             - 'alias aws="aws --endpoint-url=http://devops.tomfern.com:31566"'
+            - 'aws s3 ls s3://Balkan'
             - 'aws s3 cp README.md s3://Balkan/'
             - 'aws s3 ls s3://Balkan'
             - 'aws s3 rm s3://Balkan/README.md'
