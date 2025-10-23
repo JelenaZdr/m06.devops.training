@@ -1,0 +1,50 @@
+version: v1.0
+name: Initial Pipeline
+agent:
+  machine:
+    type: f1-standard-2
+    os_image: ubuntu2204
+blocks:
+  - name: 'Block #1'
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - checkout
+            - cd 1-terraform-apply
+            - terraform init
+            - 'artifact push .terraform '
+            - artifact push .terraform.lock.hcl
+      secrets:
+        - name: localstack
+  - name: 'Block #2'
+    task:
+      secrets:
+        - name: localstack
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - 'checkout '
+            - cd 1-terraform-apply
+            - 'artifact pull .terraform '
+            - artifact pull .terraform.lock.hcl
+            - terraform init
+            - terraform validate
+            - terraform apply -auto-approve
+            - artifact push terraform.tfstate
+  - name: 'Block #3'
+    task:
+      secrets:
+        - name: localstack
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - 'checkout '
+            - cd 1-terraform-apply
+            - artifact pull terraform.tfstate
+            - terraform init
+            - 'alias aws="aws --endpoint-url=http://devops.tomfern.com:31566"'
+            - 'aws s3 ls s3://Balkan'
+            - 'aws s3 cp README.md s3://Balkan/'
+            - 'aws s3 ls s3://Balkan'
+            - 'aws s3 rm s3://Balkan/README.md'
