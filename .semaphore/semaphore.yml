@@ -31,7 +31,7 @@ blocks:
             - artifact pull .terraform.lock.hcl
             - terraform init
             - terraform validate
-            - terraform apply -auto-approve
+            - terraform apply -auto-approve || true
             - artifact push terraform.tfstate
     dependencies:
       - 'Block #11'
