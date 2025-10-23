@@ -61,8 +61,8 @@ blocks:
             - 'checkout '
             - cd 3-terraform-dynamodb
             - artifact pull terraform.tfstate
-            - terraform init
             - 'alias aws="aws --endpoint-url=http://devops.tomfern.com:31566"'
+            - terraform init
             - aws dynamodb list-tables
             - aws dynamodb describe-table --table-name blkn_v2
             - 'aws dynamodb put-item \ --table-name blkn_v2 \ --item ''{ "user_id": {"S": "u1"}, "name": {"S": "Alice"}, "email": {"S": "alice@example.com"} }'''
